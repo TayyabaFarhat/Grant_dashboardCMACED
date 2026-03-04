@@ -1,390 +1,280 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LaunchPad Intelligence — Startup Opportunities Dashboard</title>
-  <meta name="description" content="Discover the latest startup competitions, grants, accelerators, fellowships, and hackathons — Pakistan & worldwide, updated daily." />
+  <title>CMACED · Startup Intelligence Dashboard</title>
+  <meta name="description" content="Discover verified startup competitions, grants, accelerators and hackathons — updated daily. Powered by CMACED Superior University × ID92." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@300;400;500;600;700;800&family=Satoshi:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Sector ranking + card badge styles (injected here to avoid modifying style.css) -->
-  <style>
-    /* ---- Sector Banner ---- */
-    .sector-banner {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--accent-light), var(--purple-light));
-      border: 1px solid rgba(109, 86, 250, 0.25);
-      border-radius: var(--radius-sm);
-      padding: 11px 16px;
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .sector-banner strong { color: var(--text-primary); }
-    .sector-banner-icon { color: var(--accent); font-size: 16px; flex-shrink: 0; }
-    [data-theme="dark"] .sector-banner {
-      background: linear-gradient(135deg, rgba(109,86,250,0.12), rgba(124,58,237,0.12));
-    }
-
-    /* ---- Pakistan stat card ---- */
-    .stat-icon-wrap.pakistan { background: #fef3c7; color: #d97706; }
-    .stat-card.pakistan-card:hover { border-color: #d97706; }
-    .stat-card.pakistan-card.active {
-      border-color: #d97706;
-      background: #fef3c7;
-      box-shadow: 0 0 0 1px #d97706, var(--shadow-sm);
-    }
-    [data-theme="dark"] .stat-icon-wrap.pakistan { background: #1c1000; color: #f59e0b; }
-    [data-theme="dark"] .stat-card.pakistan-card.active { background: #1c1000; }
-
-    /* ---- Pakistan priority stripe on cards ---- */
-    .opp-card.card-pakistan::before {
-      background: linear-gradient(90deg, #10b981, #059669) !important;
-      opacity: 1 !important;
-    }
-    .opp-card.card-pakistan {
-      border-color: rgba(16, 185, 129, 0.3);
-    }
-
-    /* ---- Relevant card highlight ---- */
-    .opp-card.card-relevant:not(.card-pakistan)::before {
-      background: linear-gradient(90deg, var(--accent), #a855f7) !important;
-      opacity: 1 !important;
-    }
-
-    /* ---- Extra badge row ---- */
-    .card-extra-badges {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-      margin-top: -6px;
-    }
-
-    .badge-pakistan {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 20px;
-      background: #dcfce7;
-      color: #16a34a;
-      border: 1px solid rgba(22,163,74,0.2);
-      letter-spacing: 0.3px;
-    }
-    [data-theme="dark"] .badge-pakistan { background: #052e16; color: #4ade80; }
-
-    .badge-relevant {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 20px;
-      background: var(--accent-light);
-      color: var(--accent);
-      border: 1px solid rgba(109,86,250,0.2);
-      letter-spacing: 0.3px;
-      animation: badge-pulse 2s ease infinite;
-    }
-
-    /* ---- Sector filter label ---- */
-    .sector-filter-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex: 1;
-      min-width: 150px;
-      max-width: 200px;
-    }
-    .sector-filter-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .sector-filter-label::before {
-      content: '✦';
-      font-size: 9px;
-    }
-    #sectorFilter {
-      border-color: rgba(109, 86, 250, 0.4);
-      color: var(--text-primary);
-    }
-    #sectorFilter:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(109, 86, 250, 0.15);
-    }
-
-    /* ---- Priority sort option ---- */
-    option[value="priority"] { font-weight: 600; }
-  </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-inner">
-    <div class="nav-brand">
-      <div class="brand-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-        </svg>
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="brand-mark">
+          <span class="brand-c">C</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">CMACED</span>
+          <span class="brand-sub">Superior University</span>
+        </div>
+        <div class="nav-sep"></div>
+        <div class="powered-by">
+          <span class="powered-label">powered by</span>
+          <span class="id92-badge">ID92</span>
+        </div>
       </div>
-      <span class="brand-name">LaunchPad<span class="brand-accent">Intelligence</span></span>
+
+      <div class="nav-center">
+        <span class="nav-title">Startup Intelligence Dashboard</span>
+      </div>
+
+      <div class="nav-right">
+        <div class="refresh-status" id="refreshStatus">
+          <span class="status-dot" id="statusDot"></span>
+          <span class="status-text" id="statusText">Loading…</span>
+        </div>
+        <button class="theme-btn" id="themeBtn" title="Toggle theme">
+          <span id="themeIcon">☀</span>
+        </button>
+        <button class="export-btn" id="exportBtn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export CSV
+        </button>
+      </div>
     </div>
-    <div class="nav-actions">
-      <div class="live-badge">
-        <span class="live-dot"></span>
-        Live Feed
-      </div>
-      <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-glow g1"></div>
+      <div class="hero-glow g2"></div>
     </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="eyebrow-badge">Auto-updated daily · Pakistan &amp; Global</span>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Live · Verified Daily · Official Sources Only
+      </div>
+      <h1 class="hero-h1">
+        Startup Opportunity<br/>
+        <span class="hero-gradient">Intelligence</span> Dashboard
+      </h1>
+      <p class="hero-sub">
+        Discover verified startup competitions, grants, accelerators and hackathons —<br/>
+        curated from official sources, updated every 24 hours.
+      </p>
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <span class="hm-num" id="heroTotal">—</span>
+          <span class="hm-label">Total Opportunities</span>
+        </div>
+        <div class="hm-divider"></div>
+        <div class="hero-metric">
+          <span class="hm-num teal" id="heroNew">—</span>
+          <span class="hm-label">Added This Week</span>
+        </div>
+        <div class="hm-divider"></div>
+        <div class="hero-metric">
+          <span class="hm-num amber" id="heroClosing">—</span>
+          <span class="hm-label">Closing Soon</span>
+        </div>
+        <div class="hm-divider"></div>
+        <div class="hero-metric">
+          <span class="hm-num mono" id="heroTimestamp">—</span>
+          <span class="hm-label">Last Updated</span>
+        </div>
+      </div>
     </div>
-    <h1 class="hero-title">Discover Your Next<br/><span class="gradient-text">Big Opportunity</span></h1>
-    <p class="hero-sub">The most comprehensive startup opportunity intelligence platform for Pakistan and the world. Competitions, grants, accelerators, fellowships &amp; hackathons — AI-ranked by relevance.</p>
-    <div class="hero-meta" id="heroMeta">
-      <span class="meta-item" id="metaTotal">Loading...</span>
-      <span class="meta-sep">·</span>
-      <span class="meta-item" id="metaUpdated">Fetching data...</span>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats-section">
+    <div class="stats-inner">
+      <div class="stat-card" data-color="blue">
+        <div class="sc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 7h8M6 10h8M6 13h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="sc-body">
+          <div class="sc-num" id="sTotal">—</div>
+          <div class="sc-label">Total Active</div>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" style="width:100%"></div></div>
+      </div>
+      <div class="stat-card" data-color="green">
+        <div class="sc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C6 2 3 5.5 3 9.5c0 5 7 10 7 10s7-5 7-10C17 5.5 14 2 10 2z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="sc-body">
+          <div class="sc-num" id="sNational">—</div>
+          <div class="sc-label">🇵🇰 Pakistan</div>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" id="barNational" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card" data-color="purple">
+        <div class="sc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 2.5c0 0 3 3 3 7.5s-3 7.5-3 7.5M10 2.5c0 0-3 3-3 7.5s3 7.5 3 7.5M2.5 10h15" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="sc-body">
+          <div class="sc-num" id="sIntl">—</div>
+          <div class="sc-label">🌍 International</div>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" id="barIntl" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card" data-color="amber">
+        <div class="sc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="sc-body">
+          <div class="sc-num" id="sClosing">—</div>
+          <div class="sc-label">Closing Soon</div>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" id="barClosing" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card" data-color="teal">
+        <div class="sc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v4M10 14v4M2 10h4M14 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="sc-body">
+          <div class="sc-num" id="sNew">—</div>
+          <div class="sc-label">New (48h)</div>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" id="barNew" style="width:0%"></div></div>
+      </div>
     </div>
-  </div>
-</header>
+  </section>
 
-<!-- MAIN CONTENT -->
-<main class="main-content">
-  <div class="container">
+  <!-- ═══ MAIN ═══ -->
+  <main class="main">
 
-    <!-- STAT CARDS -->
-    <section class="stats-section" id="statsSection">
-
-      <!-- Total -->
-      <div class="stat-card" data-filter="all">
-        <div class="stat-icon-wrap total">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Total Opportunities</span>
-          <span class="stat-value" id="statTotal">—</span>
-        </div>
+    <!-- FILTERS ROW -->
+    <div class="filters-row">
+      <div class="search-box">
+        <svg class="search-ico" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search programs, organizations…" autocomplete="off"/>
+        <button class="search-clear" id="searchClear">✕</button>
       </div>
-
-      <!-- Pakistan — always first priority -->
-      <div class="stat-card pakistan-card" data-filter="pakistan">
-        <div class="stat-icon-wrap pakistan">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">🇵🇰 Pakistan</span>
-          <span class="stat-value" id="statPakistan">—</span>
-        </div>
-      </div>
-
-      <!-- Grants -->
-      <div class="stat-card" data-filter="grant">
-        <div class="stat-icon-wrap grants">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Grants</span>
-          <span class="stat-value" id="statGrants">—</span>
-        </div>
-      </div>
-
-      <!-- Competitions -->
-      <div class="stat-card" data-filter="competition">
-        <div class="stat-icon-wrap comps">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Competitions</span>
-          <span class="stat-value" id="statComps">—</span>
-        </div>
-      </div>
-
-      <!-- Accelerators -->
-      <div class="stat-card" data-filter="accelerator">
-        <div class="stat-icon-wrap accel">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Accelerators</span>
-          <span class="stat-value" id="statAccel">—</span>
-        </div>
-      </div>
-
-      <!-- Closing Soon -->
-      <div class="stat-card closing-card" data-filter="closing">
-        <div class="stat-icon-wrap closing">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <div class="stat-info">
-          <span class="stat-label">Closing Soon</span>
-          <span class="stat-value closing-value" id="statClosing">—</span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- SEARCH + FILTERS -->
-    <section class="filter-section">
-      <div class="search-wrap">
-        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search opportunities, organizations, countries..." />
-        <button class="search-clear" id="searchClear" title="Clear search">×</button>
-      </div>
-
-      <div class="filter-row">
-
-        <!-- SECTOR FILTER — AI Relevance Ranking (first in row) -->
-        <div class="sector-filter-wrap">
-          <span class="sector-filter-label">AI Sector Ranking</span>
-          <select id="sectorFilter" class="filter-select">
-            <option value="">All Sectors</option>
-            <option value="ai">🤖 AI</option>
-            <option value="health">🏥 HealthTech</option>
-            <option value="fintech">💳 Fintech</option>
-            <option value="edtech">📚 EdTech</option>
-            <option value="climate">🌱 ClimateTech</option>
-            <option value="saas">☁️ SaaS</option>
-            <option value="web3">🔗 Web3</option>
-            <option value="general">🚀 General</option>
-          </select>
-        </div>
-
-        <select class="filter-select" id="filterCategory">
-          <option value="">All Categories</option>
-          <option value="grant">Grant</option>
-          <option value="competition">Competition</option>
-          <option value="accelerator">Accelerator</option>
-          <option value="hackathon">Hackathon</option>
-          <option value="fellowship">Fellowship</option>
-          <option value="funding">Funding</option>
+      <div class="filter-group">
+        <select class="filter-select" id="regionFilter">
+          <option value="">All Regions</option>
+          <option value="national">🇵🇰 Pakistan</option>
+          <option value="international">🌍 International</option>
         </select>
-
-        <select class="filter-select" id="filterCountry">
-          <option value="">All Countries</option>
-          <option value="Pakistan">🇵🇰 Pakistan</option>
+        <select class="filter-select" id="typeFilter">
+          <option value="">All Types</option>
+          <option value="grant">Grants</option>
+          <option value="competition">Competitions</option>
+          <option value="hackathon">Hackathons</option>
+          <option value="accelerator">Accelerators</option>
+          <option value="fellowship">Fellowships</option>
         </select>
-
-        <select class="filter-select" id="filterStatus">
-          <option value="">All Statuses</option>
-          <option value="open">Open</option>
-          <option value="closing_soon">Closing Soon</option>
-          <option value="new">New</option>
+        <select class="filter-select" id="sortSelect">
+          <option value="deadline">↑ Deadline</option>
+          <option value="new">✦ Newest</option>
+          <option value="prize">$ Prize</option>
         </select>
-
-        <select class="filter-select" id="filterSort">
-          <option value="priority">⭐ Smart Ranking</option>
-          <option value="date_added">Newest First</option>
-          <option value="deadline">Deadline (Soonest)</option>
-          <option value="prize">Prize (Highest)</option>
-        </select>
-
-        <button class="reset-btn" id="resetFilters">Reset</button>
       </div>
-    </section>
-
-    <!-- SECTOR RELEVANCE BANNER -->
-    <div class="sector-banner hidden" id="sectorBanner" role="status" aria-live="polite"></div>
+    </div>
 
     <!-- TABS -->
-    <section class="tabs-section">
-      <div class="tabs" id="tabs">
+    <div class="tabs-wrap">
+      <div class="tabs" role="tablist">
         <button class="tab active" data-tab="all">All</button>
+        <button class="tab" data-tab="national">🇵🇰 National</button>
+        <button class="tab" data-tab="international">🌍 International</button>
         <button class="tab" data-tab="grant">Grants</button>
         <button class="tab" data-tab="competition">Competitions</button>
-        <button class="tab" data-tab="accelerator">Accelerators</button>
         <button class="tab" data-tab="hackathon">Hackathons</button>
+        <button class="tab" data-tab="accelerator">Accelerators</button>
         <button class="tab" data-tab="fellowship">Fellowships</button>
-        <button class="tab" data-tab="funding">Funding</button>
+        <button class="tab tab-urgent" data-tab="closing">⏳ Closing Soon</button>
+        <button class="tab tab-muted" data-tab="archive">Archive</button>
       </div>
-      <div class="results-count" id="resultsCount"></div>
-    </section>
-
-    <!-- OPPORTUNITIES GRID -->
-    <section class="opportunities-section">
-      <div class="loading-state" id="loadingState">
-        <div class="loading-spinner"></div>
-        <p>Fetching opportunities...</p>
-      </div>
-      <div class="empty-state hidden" id="emptyState">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <h3>No opportunities found</h3>
-        <p>Try adjusting your search or filters.</p>
-        <button class="reset-btn" id="resetFromEmpty">Clear filters</button>
-      </div>
-      <div class="opportunities-grid" id="opportunitiesGrid"></div>
-    </section>
-
-  </div>
-</main>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="brand-name">LaunchPad<span class="brand-accent">Intelligence</span></span>
-      <p>Auto-updated daily via GitHub Actions · Pakistan &amp; Global opportunities</p>
     </div>
-    <div class="footer-meta">
-      <span>Ignite · NIC Pakistan · Plan9 · PITB · HEC · STZA · Devpost · F6S · Challenge.gov · Seedstars &amp; more</span>
-      <span class="footer-updated" id="footerUpdated"></span>
+
+    <!-- RESULTS HEADER -->
+    <div class="results-header">
+      <span class="results-count" id="resultsCount"></span>
+      <span class="results-hint" id="resultsHint"></span>
+    </div>
+
+    <!-- SKELETON -->
+    <div id="skeletonGrid" class="opp-grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+
+    <!-- OPPORTUNITY GRID -->
+    <div id="oppGrid" class="opp-grid" hidden></div>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyState" class="empty-state" hidden>
+      <div class="empty-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M18 24h12M24 18v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3>No opportunities found</h3>
+      <p>Try adjusting your search or filters.</p>
+      <button class="reset-btn" id="resetFilters">Reset filters</button>
+    </div>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-brand">CMACED × ID92</div>
+        <p>Official Startup Intelligence Platform<br/>Superior University, Lahore, Pakistan</p>
+        <div class="footer-badge">
+          <span class="status-dot active"></span>
+          Data verified · Updated every 24 hours
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">Platform</div>
+        <a href="https://superior.edu.pk" target="_blank" rel="noopener">Superior University</a>
+        <a href="#" id="footerExport">Download Archive CSV</a>
+        <a href="#" onclick="document.getElementById('oppGrid').scrollIntoView({behavior:'smooth'});return false">Browse Opportunities</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">Data Sources</div>
+        <span>ignite.org.pk · plan9.pitb.gov.pk</span>
+        <span>hec.gov.pk · pseb.org.pk</span>
+        <span>ycombinator.com · solve.mit.edu</span>
+        <span>hultprize.org · devpost.com</span>
+      </div>
+      <div class="footer-col">
+        <div class="footer-heading">Data Standards</div>
+        <p class="footer-note">All opportunities sourced exclusively from official program websites. Links validated daily. No fabricated data. Expired entries auto-archived.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 CMACED – Superior University × ID92. All rights reserved.</span>
+      <span class="footer-mono" id="footerBuild"></span>
+    </div>
+  </footer>
+
+  <!-- ═══ DETAIL MODAL ═══ -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true">
+      <button class="modal-x" id="modalClose">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div id="modalBody"></div>
     </div>
   </div>
-</footer>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
